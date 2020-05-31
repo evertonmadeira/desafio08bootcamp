@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useMemo } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -40,22 +41,33 @@ const Cart: React.FC = () => {
 
   function handleIncrement(id: string): void {
     // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
     // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
     // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const total = products.reduce((acc, product) => {
+      acc += Number(product.price * product.quantity);
 
-    return formatValue(0);
+      return acc;
+    }, 0);
+
+    return formatValue(Number(total));
   }, [products]);
 
   const totalItensInCart = useMemo(() => {
     // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const total = products.reduce((acc, product) => {
+      acc += Number(product.quantity);
 
-    return 0;
+      return acc;
+    }, 0);
+    return Number(total);
   }, [products]);
 
   return (
